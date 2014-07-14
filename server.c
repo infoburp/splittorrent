@@ -135,19 +135,11 @@ int main(int argc, char **argv)
 	static struct sockaddr_in serv_addr; /* static = initialised to zeros */
 
 	if( argc < 3  || argc > 3 || !strcmp(argv[1], "-?") ) {
-		(void)printf("hint: nweb Port-Number Top-Directory\t\tversion %d\n\n"
-	"\tnweb is a small and very safe mini web server\n"
-	"\tnweb only servers out file/web pages with extensions named below\n"
-	"\t and only from the named directory or its sub-directories.\n"
-	"\tThere is no fancy features = safe and secure.\n\n"
-	"\tExample: nweb 8181 /home/nwebdir &\n\n"
-	"\tOnly Supports:", VERSION);
+		(void)printf("hint: ./server Port-Number Top-Directory\t\tversion %d\n\n"
+	"\tsplittorrent is a torrent client split between c and js\n"
+	);
 		for(i=0;extensions[i].ext != 0;i++)
 			(void)printf(" %s",extensions[i].ext);
-
-		(void)printf("\n\tNot Supported: URLs including \"..\", Java, Javascript, CGI\n"
-	"\tNot Supported: directories / /etc /bin /lib /tmp /usr /dev /sbin \n"
-	"\tNo warranty given or implied\n\tNigel Griffiths nag@uk.ibm.com\n"  );
 		exit(0);
 	}
 	if( !strncmp(argv[2],"/"   ,2 ) || !strncmp(argv[2],"/etc", 5 ) ||
@@ -169,7 +161,7 @@ int main(int argc, char **argv)
 	for(i=0;i<32;i++)
 		(void)close(i);		/* close open files */
 	(void)setpgrp();		/* break away from process group */
-	logger(LOG,"nweb starting",argv[1],getpid());
+	logger(LOG,"splittorrent server starting",argv[1],getpid());
 	/* setup the network socket */
 	if((listenfd = socket(AF_INET, SOCK_STREAM,0)) <0)
 		logger(ERROR, "system call","socket",0);
